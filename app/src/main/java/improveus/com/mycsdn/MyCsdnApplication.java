@@ -6,6 +6,7 @@ import android.content.Context;
 /**
  * 作者：Administrator on 2017/2/14 09:05
  * 邮箱: 511421121@qq.com
+ * 全局状态的基类
  */
 public class MyCsdnApplication extends Application {
 

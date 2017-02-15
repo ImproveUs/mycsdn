@@ -14,7 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 public abstract class BaseFragmentActivity extends AppCompatActivity {
 
     /**
-     * 附着fragment
+     * 附着fragment  这里还是使用v4报的fragment
      *
      * @param fragmentManager
      * @param fragment
