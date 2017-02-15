@@ -1,7 +1,6 @@
 package improveus.com.mycsdn.manage;
 
-import java.util.concurrent.TimeUnit;
-
+import improveus.com.mycsdn.util.OkHttpUtil;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -22,24 +21,41 @@ public class RetrofitManage {
     private RetrofitService retrofitService;
     private static final int TIMEOUT = 10000;//超时时间10秒
 
+    //volatile
+    private static volatile OkHttpClient mOkHttpClient;
+
     private RetrofitManage() {
-        okhttpClient = new OkHttpClient.Builder().readTimeout(TIMEOUT, TimeUnit.SECONDS);
+//      okhttpClient = new OkHttpClient.Builder().readTimeout(TIMEOUT, TimeUnit.SECONDS);
         retrofitClient = new Retrofit.Builder()
-                .client(okhttpClient.build())
+                .client(getOkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         retrofitService = retrofitClient.create(RetrofitService.class);
     }
 
+    private OkHttpClient getOkHttpClient(){
+        if(mOkHttpClient == null){
+            synchronized (RetrofitManage.class){
+                if(mOkHttpClient == null){
+                    mOkHttpClient = OkHttpUtil.getInstance().getOkHttpClient();
+                }
+            }
+        }
+        return mOkHttpClient;
+    }
+
     private static RetrofitManage getInstance() {
         if (retrofitManage == null) {
             synchronized (RetrofitManage.class) {
-                retrofitManage = new RetrofitManage();
+                if (retrofitManage == null) {
+                    retrofitManage = new RetrofitManage();
+                }
             }
         }
         return retrofitManage;
     }
+
 
     public static RetrofitService getDefault() {
         return getInstance().retrofitService;
