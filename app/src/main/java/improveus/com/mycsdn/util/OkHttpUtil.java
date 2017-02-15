@@ -44,7 +44,7 @@ public class OkHttpUtil {
                 //设置写的时间
                 .writeTimeout(10, TimeUnit.SECONDS)
                 .addInterceptor(mRewriteCacheControlInterceptor)
-                .addNetworkInterceptor(mRewriteCacheControlInterceptor)
+//                .addNetworkInterceptor(mRewriteCacheControlInterceptor)
                 .addInterceptor(mLoggingInterceptor)
                 .build();
     }
