@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="improveus.com.mycsdn">
+    //网络权限
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
+    //读写权限
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
     <application
         android:name=".MyCsdnApplication"
         android:allowBackup="true"
