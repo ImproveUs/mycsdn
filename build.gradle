@@ -12,6 +12,10 @@ buildscript {
     }
 }
 
+public final class BuildConfig {
+    public static final boolean LOG_DEBUG = true;
+}
+
 allprojects {
     repositories {
         jcenter()

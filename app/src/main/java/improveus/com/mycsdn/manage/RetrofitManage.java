@@ -17,9 +17,9 @@ public class RetrofitManage {
     private static RetrofitManage retrofitManage;
 
     private Retrofit retrofitClient;
-    private OkHttpClient.Builder okhttpClient;
+    //    private OkHttpClient.Builder okhttpClient;
     private RetrofitService retrofitService;
-    private static final int TIMEOUT = 10000;//超时时间10秒
+//    private static final int TIMEOUT = 10000;//超时时间10秒
 
     //volatile
     private static volatile OkHttpClient mOkHttpClient;
@@ -28,16 +28,17 @@ public class RetrofitManage {
 //      okhttpClient = new OkHttpClient.Builder().readTimeout(TIMEOUT, TimeUnit.SECONDS);
         retrofitClient = new Retrofit.Builder()
                 .client(getOkHttpClient())
+                .baseUrl("http://blog.csdn.net/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         retrofitService = retrofitClient.create(RetrofitService.class);
     }
 
-    private OkHttpClient getOkHttpClient(){
-        if(mOkHttpClient == null){
-            synchronized (RetrofitManage.class){
-                if(mOkHttpClient == null){
+    private OkHttpClient getOkHttpClient() {
+        if (mOkHttpClient == null) {
+            synchronized (RetrofitManage.class) {
+                if (mOkHttpClient == null) {
                     mOkHttpClient = OkHttpUtil.getInstance().getOkHttpClient();
                 }
             }

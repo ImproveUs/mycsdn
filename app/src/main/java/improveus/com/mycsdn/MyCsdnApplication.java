@@ -3,6 +3,8 @@ package improveus.com.mycsdn;
 import android.app.Application;
 import android.content.Context;
 
+import com.socks.library.KLog;
+
 /**
  * 作者：Administrator on 2017/2/14 09:05
  * 邮箱: 511421121@qq.com
@@ -16,6 +18,7 @@ public class MyCsdnApplication extends Application {
     public void onCreate() {
         super.onCreate();
         applicationContext = getApplicationContext();
+        KLog.init(BuildConfig.LOG_DEBUG);
     }
 
     /**

@@ -4,10 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.AppCompatTextView
+    <TextView
         android:id="@+id/main_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="这是一个fragment" />
-
+        android:layout_height="match_parent" />
 </LinearLayout>

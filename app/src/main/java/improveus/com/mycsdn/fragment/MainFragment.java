@@ -28,7 +28,7 @@ public class MainFragment extends BaseFragment implements MainMvpView {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-
+        TextView mainView = (TextView) getView().findViewById(R.id.main_text);
     }
 
     @Override
@@ -38,6 +38,5 @@ public class MainFragment extends BaseFragment implements MainMvpView {
 
     @Override
     public void onPresenterStart() {
-        ((TextView) getView().findViewById(R.id.main_text)).setText("这是一个fragment presenter已经创建并执行");
     }
 }
