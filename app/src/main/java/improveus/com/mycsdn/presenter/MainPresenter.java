@@ -2,9 +2,15 @@ package improveus.com.mycsdn.presenter;
 
 import com.socks.library.KLog;
 
-import java.io.IOException;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.util.ArrayList;
 
 import improveus.com.mycsdn.manage.RetrofitManage;
+import improveus.com.mycsdn.model.MyCsdnModel;
 import improveus.com.mycsdn.mvpview.MainMvpView;
 import okhttp3.ResponseBody;
 import rx.Observable;
@@ -46,11 +52,19 @@ public class MainPresenter implements BasePresenter {
 
                     @Override
                     public void onNext(ResponseBody responseBody) {
+                        ArrayList<MyCsdnModel> myCsdnModels = new ArrayList<MyCsdnModel>();
                         try {
-                            KLog.i(responseBody.string());
-                        } catch (IOException e) {
+                            Document parse = Jsoup.parse(responseBody.string());
+                            Elements link_title = parse.getElementsByClass("link_title");//获取标题节点
+                            for (Element title : link_title) {
+                                MyCsdnModel myCsdnModel = new MyCsdnModel();
+                                myCsdnModel.setTitle(title.text());//获取单个标题
+                                myCsdnModels.add(myCsdnModel);
+                            }
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
+                        KLog.i(myCsdnModels.toString());
                     }
                 });
     }
