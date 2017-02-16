@@ -50,7 +50,6 @@ public class MainPresenter implements BasePresenter {
 
     private void getBlogList() {
         Observable<ResponseBody> contents = RetrofitManage.getDefault().getBlogList("contents");
-        KLog.i("运行线程" + Thread.currentThread().getName());
         contents.subscribeOn(Schedulers.io())
                 .map(new Func1<ResponseBody, ArrayList<MyCsdnModel>>() {
                     @Override
@@ -72,7 +71,7 @@ public class MainPresenter implements BasePresenter {
                                 myCsdnModels.add(myCsdnModel);
                             }
                         } catch (Exception e) {
-                            //未处理错误
+                            //这里不用处理异常  经测试异常会跑到onError方法
                         }
                         return myCsdnModels;
                     }
@@ -86,14 +85,15 @@ public class MainPresenter implements BasePresenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        KLog.i("onError");
+                        //TODO 这里怎处理对应的异常?
+                        KLog.i("onError" + e.toString());
                     }
 
                     @Override
                     public void onNext(ArrayList<MyCsdnModel> response) {
-                        KLog.i("运行线程" + Thread.currentThread().getName());
                         KLog.i(response.get(0).toString());
                     }
                 });
     }
 }
+
