@@ -16,6 +16,7 @@ import okhttp3.ResponseBody;
 import rx.Observable;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -49,21 +50,12 @@ public class MainPresenter implements BasePresenter {
 
     private void getBlogList() {
         Observable<ResponseBody> contents = RetrofitManage.getDefault().getBlogList("contents");
+        KLog.i("运行线程" + Thread.currentThread().getName());
         contents.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ResponseBody>() {
+                .map(new Func1<ResponseBody, ArrayList<MyCsdnModel>>() {
                     @Override
-                    public void onCompleted() {
-                        KLog.i("onCompleted");
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        KLog.i("onError");
-                    }
-
-                    @Override
-                    public void onNext(ResponseBody responseBody) {
+                    public ArrayList<MyCsdnModel> call(ResponseBody responseBody) {
+                        KLog.i("运行线程" + Thread.currentThread().getName());
                         ArrayList<MyCsdnModel> myCsdnModels = new ArrayList<MyCsdnModel>();
                         try {
                             Document parse = Jsoup.parse(responseBody.string());
@@ -80,10 +72,27 @@ public class MainPresenter implements BasePresenter {
                                 myCsdnModels.add(myCsdnModel);
                             }
                         } catch (Exception e) {
-                            e.printStackTrace();
+                            //未处理错误
                         }
-                        KLog.i(myCsdnModels.get(0).toString());
+                        return myCsdnModels;
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ArrayList<MyCsdnModel>>() {
+                    @Override
+                    public void onCompleted() {
+                        KLog.i("onCompleted");
+                    }
 
+                    @Override
+                    public void onError(Throwable e) {
+                        KLog.i("onError");
+                    }
+
+                    @Override
+                    public void onNext(ArrayList<MyCsdnModel> response) {
+                        KLog.i("运行线程" + Thread.currentThread().getName());
+                        KLog.i(response.get(0).toString());
                     }
                 });
     }
