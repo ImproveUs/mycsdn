@@ -4,9 +4,16 @@
     <color name="colorPrimaryDark">#7D3333</color>
     <color name="colorAccent">#FF4081</color>
     
-    <color name="black_line">#55000000</color>
+    
 
     <color name="red_shallow">#881130</color>
+
+    <color name="black_line">#55000000</color>
+
+    <color name="gray">#898787</color>
+    <color name="gray_low">#9b9b9b</color>
+    <color name="divide_gray_color">#E8E9E8</color>
+    
     <color name="search_back">#E1E1E1</color>
     
     <color name="white">#ffffffff</color>
