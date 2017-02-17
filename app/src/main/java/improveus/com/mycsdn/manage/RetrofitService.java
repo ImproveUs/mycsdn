@@ -12,7 +12,6 @@ import rx.Observable;
  */
 public interface RetrofitService {
 
-    //    http://blog.csdn.net/u013424496/article/list/2
-    @GET("u013424496/article/list/{list}")
-    Observable<ResponseBody> getBlogList(@Path("list") int list);
+    @GET("/u013424496/article/list/{page}")
+    Observable<ResponseBody> getBlogList(@Path("page") int page);
 }

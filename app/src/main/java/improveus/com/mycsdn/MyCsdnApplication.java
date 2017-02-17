@@ -23,7 +23,6 @@ public class MyCsdnApplication extends Application {
 
     /**
      * 用于全局获取上下文
-     *
      * @return
      */
     public static Context getAppContext() {
