@@ -7,6 +7,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.socks.library.KLog;
+
 import improveus.com.mycsdn.R;
 
 import static improveus.com.mycsdn.R.id.webView;
@@ -22,6 +24,7 @@ public class DetailArticleActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        String TITLEURL ="http://blog.csdn.net/"+getIntent().getStringExtra("TITLEURL");
         wb = (WebView) findViewById(webView);
 
         wb.setWebViewClient(new WebViewClient() {
@@ -44,6 +47,7 @@ public class DetailArticleActivity extends Activity{
         });
         WebSettings settings = wb.getSettings();
         settings.setJavaScriptEnabled(true);
-        wb.loadUrl("http://blog.csdn.net/u013424496/article/details/55104125");
+        KLog.i("WebView",TITLEURL);
+        wb.loadUrl(TITLEURL);
     }
 }

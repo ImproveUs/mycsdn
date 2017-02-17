@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">读博客</string>
+
+    <string name="item_main_title_name">博客标题</string>
+    <string name="item_main_title_content">内容简介</string>
+    <string name="item_main_time">2017-02-16</string>
+    <string name="item_main_comment_number">评论数：12</string>
+    <string name="item_main_read_number">阅读量：1103</string>
+    
+
 </resources>

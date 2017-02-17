@@ -57,6 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="8dp"
+            android:singleLine="true"
             android:layout_marginLeft="5dp"
             android:paddingBottom="8dp"
             android:background="@null"/>
@@ -71,16 +72,11 @@
         android:layout_marginRight="10dp"
         android:layout_centerInParent="true"
         android:background="@drawable/chose_type"/>
-
    </RelativeLayout>
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/refresh_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>
