@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import improveus.com.mycsdn.presenter.BasePresenter;
 
@@ -20,6 +21,7 @@ import improveus.com.mycsdn.presenter.BasePresenter;
 public abstract class BaseFragment<P extends BasePresenter> extends Fragment {
 
     protected P mPresenter;
+    private Toast toast;
 
     @Nullable
     @Override
@@ -45,4 +47,15 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment {
         return null;
     }
 
+    /**
+     * 提示用的toast
+     *
+     * @param tip
+     */
+    protected void call2User(String tip) {
+        if (toast == null)
+            toast = Toast.makeText(getContext(), tip, Toast.LENGTH_SHORT);
+        toast.setText(tip);
+        toast.show();
+    }
 }

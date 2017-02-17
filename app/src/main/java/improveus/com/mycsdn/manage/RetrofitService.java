@@ -2,7 +2,7 @@ package improveus.com.mycsdn.manage;
 
 import okhttp3.ResponseBody;
 import retrofit2.http.GET;
-import retrofit2.http.Query;
+import retrofit2.http.Path;
 import rx.Observable;
 
 /**
@@ -12,6 +12,7 @@ import rx.Observable;
  */
 public interface RetrofitService {
 
-    @GET("u013424496")
-    Observable<ResponseBody> getBlogList(@Query("viewmode") String viewmode);
+    //    http://blog.csdn.net/u013424496/article/list/2
+    @GET("u013424496/article/list/{list}")
+    Observable<ResponseBody> getBlogList(@Path("list") int list);
 }

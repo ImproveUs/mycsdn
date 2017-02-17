@@ -4,7 +4,11 @@ package improveus.com.mycsdn.fragment;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import improveus.com.mycsdn.R;
+import improveus.com.mycsdn.manage.ListRefreshType;
+import improveus.com.mycsdn.model.MyCsdnModel;
 import improveus.com.mycsdn.mvpview.MainMvpView;
 import improveus.com.mycsdn.presenter.BasePresenter;
 import improveus.com.mycsdn.presenter.MainPresenter;
@@ -37,6 +41,17 @@ public class MainFragment extends BaseFragment implements MainMvpView {
     }
 
     @Override
-    public void onPresenterStart() {
+    public void onDataCompleted(ListRefreshType type) {
+
+    }
+
+    @Override
+    public void omDataError(ListRefreshType type) {
+
+    }
+
+    @Override
+    public void onDataNext(ListRefreshType type, ArrayList<MyCsdnModel> response) {
+        call2User(response.get(0).getTitle());
     }
 }
