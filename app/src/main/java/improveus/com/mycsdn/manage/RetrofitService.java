@@ -12,6 +12,11 @@ import rx.Observable;
  */
 public interface RetrofitService {
 
+    //读取文章栏目
     @GET("/u013424496/article/list/{page}")
     Observable<ResponseBody> getBlogList(@Path("page") int page);
+
+    //读取文章
+    @GET("u013424496/article/details/{articleid}")
+    Observable<ResponseBody> getBlogDetial(@Path("articleid") String articleid);
 }
