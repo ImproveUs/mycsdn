@@ -1,7 +1,5 @@
 package improveus.com.mycsdn.presenter;
 
-import android.support.annotation.NonNull;
-
 import com.socks.library.KLog;
 
 import org.jsoup.Jsoup;
@@ -9,16 +7,15 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
-import improveus.com.mycsdn.manage.ListRefreshType;
 import improveus.com.mycsdn.manage.RetrofitManage;
 import improveus.com.mycsdn.model.MyCsdnModel;
 import improveus.com.mycsdn.mvpview.MainMvpView;
+import improveus.com.mycsdn.util.JsoupForH5;
 import okhttp3.ResponseBody;
 import rx.Observable;
-import rx.Subscriber;
+import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
@@ -42,7 +39,6 @@ public class MainPresenter implements BasePresenter {
     //    </div>
 
     private MainMvpView mMainMvpView;
-    private int mPage;
 
     public MainPresenter(MainMvpView mvpView) {
         this.mMainMvpView = mvpView;
@@ -50,87 +46,48 @@ public class MainPresenter implements BasePresenter {
 
     @Override
     public void presenterStart() {
-        getBlogList(ListRefreshType.RESRESH_TYPE);
+        getBlogList();
     }
 
-    /**
-     * 获取刷新数据
-     */
-    public void getBlogList(final ListRefreshType type) {
-        Subscriber<ArrayList<MyCsdnModel>> subscriber = new Subscriber<ArrayList<MyCsdnModel>>() {
-            @Override
-            public void onCompleted() {
-                KLog.i("onCompleted");
-                mMainMvpView.onDataCompleted(type);
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                //TODO 这里怎处理对应的异常?告诉用户是数据获取失败还是解析失败
-                KLog.i("onError" + e.toString());
-                mMainMvpView.omDataError(type);
-            }
-
-            @Override
-            public void onNext(ArrayList<MyCsdnModel> response) {
-                mMainMvpView.onDataNext(type, response);
-            }
-        };
-        switch (type) {
-            case RESRESH_TYPE:
-                dealBlogList(subscriber, mPage = 0);
-                break;
-            case LOADING_TYPE:
-                dealBlogList(subscriber, ++mPage);
-                break;
-        }
-    }
-
-    private void dealBlogList(Subscriber<ArrayList<MyCsdnModel>> subscriber, int list) {
-        Observable<ResponseBody> contents = RetrofitManage.getDefault().getBlogList(list);
+    private void getBlogList() {
+        Observable<ResponseBody> contents = RetrofitManage.getDefault().getBlogList(1);
+        KLog.i("运行线程" + Thread.currentThread().getName());
         contents.subscribeOn(Schedulers.io())
                 .map(new Func1<ResponseBody, ArrayList<MyCsdnModel>>() {
                     @Override
                     public ArrayList<MyCsdnModel> call(ResponseBody responseBody) {
-                        ArrayList<MyCsdnModel> myCsdnModels = null;
-                        try {//TODO 这里try--catch只能这么写?
-                            myCsdnModels = responseBody2CsdnModels(responseBody);
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                        KLog.i("运行线程" + Thread.currentThread().getName());
+                        ArrayList<MyCsdnModel> myCsdnModels = new ArrayList<MyCsdnModel>();
+                        try {
+                            Document parse = Jsoup.parse(responseBody.string());
+                            Elements list_item_new = parse.getElementsByClass("list_item");//获取标题列表节点
+                            for (Element itemNew : list_item_new) {//遍历
+                                MyCsdnModel myCsdnModel = JsoupForH5.getMyCsdnModelByh5(itemNew);
+                                myCsdnModels.add(myCsdnModel);
+                            }
+                        } catch (Exception e) {
+                            //未处理错误
                         }
                         return myCsdnModels;
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(subscriber);
-    }
+                .subscribe(new Observer<ArrayList<MyCsdnModel>>() {
+                    @Override
+                    public void onCompleted() {
+                        KLog.i("onCompleted");
+                    }
 
-    /**
-     * 将原始数据解析成模型列表
-     *
-     * @param responseBody
-     * @return
-     * @throws IOException
-     */
-    @NonNull
-    private ArrayList<MyCsdnModel> responseBody2CsdnModels(ResponseBody responseBody) throws IOException {
-        KLog.i("运行线程" + Thread.currentThread().getName());
-        ArrayList<MyCsdnModel> myCsdnModels = new ArrayList<MyCsdnModel>();
-        Document parse = Jsoup.parse(responseBody.string());
-        Elements list_item_new = parse.getElementsByClass("list_item");//获取标题列表节点
-        for (Element itemNew : list_item_new) {//遍历
-            MyCsdnModel myCsdnModel = new MyCsdnModel();
-            Element linkTitle = itemNew.getElementsByClass("link_title").get(0);//获取列表标题节点
-            myCsdnModel.setTitle(linkTitle.text());
-            myCsdnModel.setTitleUrl(linkTitle.getAllElements().get(1).attr("href"));
-            Element articleManage = itemNew.getElementsByClass("article_manage").get(0);//获取列表标题信息节点
-            myCsdnModel.setPostdate(articleManage.getElementsByClass("link_postdate").text());
-            myCsdnModel.setArticleView(articleManage.getElementsByClass("link_view").text());
-            myCsdnModel.setArticleComments(articleManage.getElementsByClass("link_comments").text());
-            myCsdnModels.add(myCsdnModel);
-        }
-        return myCsdnModels;
-    }
+                    @Override
+                    public void onError(Throwable e) {
+                        KLog.i("onError");
+                    }
 
+                    @Override
+                    public void onNext(ArrayList<MyCsdnModel> response) {
+                        KLog.i("运行线程" + Thread.currentThread().getName());
+                        KLog.i(response.get(0).toString());
+                    }
+                });
+    }
 }
-

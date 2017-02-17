@@ -5,7 +5,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -17,4 +17,5 @@ public class ExampleUnitTest {
     public void addition_isCorrect() throws Exception {
 //        assertEquals(4, 2 + 2);
     }
+
 }

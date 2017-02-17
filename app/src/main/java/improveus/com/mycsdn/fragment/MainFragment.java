@@ -2,7 +2,6 @@ package improveus.com.mycsdn.fragment;
 
 
 import android.os.Bundle;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -32,7 +31,7 @@ public class MainFragment extends BaseFragment implements MainMvpView {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        TextView mainView = (TextView) getView().findViewById(R.id.main_text);
+
     }
 
     @Override
