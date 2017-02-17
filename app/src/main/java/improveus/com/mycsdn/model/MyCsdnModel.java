@@ -7,10 +7,12 @@ package improveus.com.mycsdn.model;
 public class MyCsdnModel {
 
     private String title;
+    private String articleDescription;
     private String titleUrl;
     private String postdate;
     private String articleView;
     private String articleComments;
+    private String iconType;
 
     public String getTitle() {
         return title;
@@ -18,6 +20,14 @@ public class MyCsdnModel {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getArticleDescription() {
+        return articleDescription;
+    }
+
+    public void setArticleDescription(String articleDescription) {
+        this.articleDescription = articleDescription;
     }
 
     public String getTitleUrl() {
@@ -52,14 +62,24 @@ public class MyCsdnModel {
         this.articleComments = articleComments;
     }
 
+    public String getIconType() {
+        return iconType;
+    }
+
+    public void setIconType(String iconType) {
+        this.iconType = iconType;
+    }
+
     @Override
     public String toString() {
         return "MyCsdnModel{" +
-                "title='" + title + '\'' +
-                ", titleUrl='" + titleUrl + '\'' +
-                ", postdate='" + postdate + '\'' +
-                ", articleView='" + articleView + '\'' +
-                ", articleComments='" + articleComments + '\'' +
-                '}';
+                "\n title='" + title + '\'' +
+                ", \n articleDescription='" + articleDescription + '\'' +
+                ", \n titleUrl='" + titleUrl + '\'' +
+                ", \n postdate='" + postdate + '\'' +
+                ", \n articleView='" + articleView + '\'' +
+                ", \n articleComments='" + articleComments + '\'' +
+                ", \n iconType='" + iconType + '\'' +
+                "\n }";
     }
 }

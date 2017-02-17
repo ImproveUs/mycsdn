@@ -42,7 +42,7 @@ public class MainPresenter implements BasePresenter {
     //    </div>
 
     private MainMvpView mMainMvpView;
-    private int mPage;
+    private int mPage = 1;
 
     public MainPresenter(MainMvpView mvpView) {
         this.mMainMvpView = mvpView;
@@ -78,7 +78,7 @@ public class MainPresenter implements BasePresenter {
         };
         switch (type) {
             case RESRESH_TYPE:
-                dealBlogList(subscriber, mPage = 0);
+                dealBlogList(subscriber, mPage = 1);
                 break;
             case LOADING_TYPE:
                 dealBlogList(subscriber, ++mPage);
@@ -117,12 +117,18 @@ public class MainPresenter implements BasePresenter {
         KLog.i("运行线程" + Thread.currentThread().getName());
         ArrayList<MyCsdnModel> myCsdnModels = new ArrayList<MyCsdnModel>();
         Document parse = Jsoup.parse(responseBody.string());
+        KLog.i(parse.html());
         Elements list_item_new = parse.getElementsByClass("list_item");//获取标题列表节点
         for (Element itemNew : list_item_new) {//遍历
             MyCsdnModel myCsdnModel = new MyCsdnModel();
+            Elements article_title = itemNew.getElementsByClass("article_title");
+            String aClass = article_title.get(0).child(0).attr("class");
+            String[] split = aClass.split("_");
+            myCsdnModel.setIconType(split[split.length - 1]);
             Element linkTitle = itemNew.getElementsByClass("link_title").get(0);//获取列表标题节点
             myCsdnModel.setTitle(linkTitle.text());
             myCsdnModel.setTitleUrl(linkTitle.getAllElements().get(1).attr("href"));
+            myCsdnModel.setArticleDescription(itemNew.getElementsByClass("article_description").text());
             Element articleManage = itemNew.getElementsByClass("article_manage").get(0);//获取列表标题信息节点
             myCsdnModel.setPostdate(articleManage.getElementsByClass("link_postdate").text());
             myCsdnModel.setArticleView(articleManage.getElementsByClass("link_view").text());

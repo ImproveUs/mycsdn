@@ -19,6 +19,8 @@ import improveus.com.mycsdn.presenter.MainPresenter;
  */
 public class MainFragment extends BaseFragment implements MainMvpView {
 
+    private TextView mainView;
+
     public static MainFragment getInstance() {
         return new MainFragment();
     }
@@ -32,7 +34,7 @@ public class MainFragment extends BaseFragment implements MainMvpView {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        TextView mainView = (TextView) getView().findViewById(R.id.main_text);
+        mainView = (TextView) getView().findViewById(R.id.main_text);
     }
 
     @Override
@@ -52,6 +54,6 @@ public class MainFragment extends BaseFragment implements MainMvpView {
 
     @Override
     public void onDataNext(ListRefreshType type, ArrayList<MyCsdnModel> response) {
-        call2User(response.get(0).getTitle());
+        mainView.setText(response.get(0).toString());
     }
 }
