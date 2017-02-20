@@ -45,4 +45,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-all:2.0.2-beta'
     testCompile 'org.mockito:mockito-core:2.7.7'
+
+    //recycleview刷新框架https://github.com/liyanlong986829/SuperRecycleView-master
+    compile 'com.supercwn.superrecycleview:superlibrary:1.2.0'
 }
