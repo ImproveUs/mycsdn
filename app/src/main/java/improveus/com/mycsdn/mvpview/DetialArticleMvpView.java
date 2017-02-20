@@ -5,4 +5,6 @@ package improveus.com.mycsdn.mvpview;
  * 邮箱: 511421121@qq.com
  */
 public interface DetialArticleMvpView {
+    void onNext(String article_content);
+
 }
