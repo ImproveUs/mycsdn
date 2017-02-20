@@ -1,0 +1,394 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <script type="text/javascript" src="http://c.csdnimg.cn/pubfooter/js/tracking.js"
+            charset="utf-8"></script>
+
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="alternate" media="handheld" href="#"/>
+
+    <title>自定义控件的高级自定义属性 - 彭思正的博客
+        - 博客频道 - CSDN.NET</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="description"
+          content="1.linux串口编程需要的头文件#include &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;//标准输入输出定义#include &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;//标准函数库定义#include &#160;&#160;&#160;&#160;&#160;&#160;&#160;//Unix标准函数定义#include #include #include &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; //文件控制定义#include &#160;&#160;&#160;&#160;&#160;//POSIX中断控制定义#include"/>
+    <script src="http://static.blog.csdn.net/scripts/jquery.js" type="text/javascript"></script>
+    <script type="text/javascript"
+            src="http://static.blog.csdn.net/scripts/jquery-version.js"></script>
+    <script type="text/javascript" src="http://static.blog.csdn.net/scripts/ad.js?v=1.1"></script>
+    <link rel="Stylesheet" type="text/css"
+          href="http://static.blog.csdn.net/skin/light_blue/css/style.css?v=1.1"/>
+    <link id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate"
+          href="/u013424496/rss/list"/>
+    <link rel="shortcut icon" href="http://c.csdnimg.cn/public/favicon.ico"/>
+    <link type="text/css" rel="stylesheet"
+          href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css"/>
+
+</head>
+<body>
+
+<div id="container">
+    <div id="body">
+        <div id="main">
+            <div class="main">
+                <link href="http://static.blog.csdn.net/css/comment1.css" type="text/css"
+                      rel="stylesheet"/>
+                <link href="http://static.blog.csdn.net/css/style1.css" type="text/css"
+                      rel="stylesheet"/>
+                <script language='JavaScript' type='text/javascript'
+                        src='http://download.csdn.net/js/jquery.cookie.js'></script>
+                <script type="text/javascript"
+                        src="http://c.csdnimg.cn/rabbit/search-service/main.js"></script>
+                <link rel="stylesheet"
+                      href="http://static.blog.csdn.net/public/res-min/markdown_views.css?v=1.0"/>
+                <link rel="stylesheet" href="http://static.blog.csdn.net/css/category.css?v=1.0"/>
+                <script type="text/javascript"
+                        src="http://static.blog.csdn.net/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+                <script type="text/javascript"
+                        src="http://static.blog.csdn.net/scripts/web-storage-cache.min.js"></script>
+                <script type="text/javascript"
+                        src="http://static.blog.csdn.net/scripts/replace.min.js"></script>
+                <div id="article_details" class="details">
+                    <div class="article_title">
+                        <span class="ico ico_type_Original"></span>
+                        <h1>
+        <span class="link_title"><a href="/u013424496/article/details/55104125">
+        自定义控件的高级自定义属性            
+        </a></span>
+                        </h1>
+                    </div>
+
+
+                    <div class="article_manage clearfix">
+                        <div class="article_l">
+            <span class="link_categories">
+            标签：
+              <a href='http://www.csdn.net/tag/android%e8%87%aa%e5%ae%9a%e4%b9%89%e5%b1%9e%e6%80%a7'
+                 target=_blank
+                 onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">android自定义属性</a>
+            </span>
+                        </div>
+                        <div class="article_r">
+                            <span class="link_postdate">2017-02-14 19:25</span>
+                            <span class="link_view" title="阅读次数">30人阅读</span>
+                            <span class="link_comments" title="评论次数"> <a href="#comments"
+                                                                         onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_pinglun'])">评论</a>(1)</span>
+                            <span class="link_collect tracking-ad" data-mod="popu_171"> <a
+                                    href="javascript:void(0);"
+                                    onclick="javascript:collectArticle('%e8%87%aa%e5%ae%9a%e4%b9%89%e6%8e%a7%e4%bb%b6%e7%9a%84%e9%ab%98%e7%ba%a7%e8%87%aa%e5%ae%9a%e4%b9%89%e5%b1%9e%e6%80%a7','55104125');return false;"
+                                    title="收藏">收藏</a></span>
+                            <span class="link_report"> <a href="#report"
+                                                          onclick="javascript:report(55104125,2);return false;"
+                                                          title="举报">举报</a></span>
+
+                        </div>
+                    </div>
+                    <div class="category clearfix">
+                        <div class="category_l">
+                            <img src="http://static.blog.csdn.net/images/category_icon.jpg">
+                            <span>分类：</span>
+                        </div>
+                        <div class="category_r">
+                            <label onclick="GetCategoryArticles('6177175','u013424496','top','55104125');">
+                                <span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_fenlei']);">android 开发<em>（37）</em></span>
+                                <img class="arrow-down"
+                                     src="http://static.blog.csdn.net/images/arrow_triangle _down.jpg"
+                                     style="display:inline;">
+                                <img class="arrow-up"
+                                     src="http://static.blog.csdn.net/images/arrow_triangle_up.jpg"
+                                     style="display:none;">
+                                <div class="subItem">
+                                    <div class="subItem_t"><a
+                                            href="http://blog.csdn.net/u013424496/article/category/6177175"
+                                            target="_blank">作者同类文章</a><i class="J_close">X</i></div>
+                                    <ul class="subItem_l" id="top_6177175">
+                                    </ul>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <script type="text/javascript"
+                            src="http://static.blog.csdn.net/scripts/category.js"></script>
+                    <div class="bog_copyright">
+                        <p class="copyright_p">版权声明：本文为博主原创文章，未经博主允许不得转载。</p>
+                    </div>
+
+
+                    <div id="article_content" class="article_content">
+
+                        <p><span style="font-size:14px">&nbsp; &nbsp;<span style="font-size:14px">情人节</span>，代码和我可能更配吧。</span>
+                        </p>
+                        <p><span style="font-size:14px"><span style="font-size:14px">看了标题肯定小伙伴们肯定会狠狠的鄙视一把，丢下一句 不就是自定义控件的自定义属性么拉倒了，这玩意谁不会，会一点自定义的谁都会了，然后就要关掉网页了，客官不急，请看下图，系统view调用自定义View的属性</span><br>
+</span></p>
+                        <p><span style="font-size:14px"><span style="font-size:14px"><img
+                                src="http://img.blog.csdn.net/20170215083948434?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzQyNDQ5Ng==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center"
+                                alt=""><br>
+</span></span></p>
+                        <p><span style="font-size:14px"><span style="font-size:14px"><span
+                                style="font-size:14px">实现的效果是：</span><br>
+</span></span></p>
+                        <p><span style="font-size:14px"><span style="font-size:14px"><span
+                                style="font-size:14px"><img
+                                src="http://img.blog.csdn.net/20170215083956083?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzQyNDQ5Ng==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center"
+                                alt=""><br>
+</span></span></span></p>
+                        <p><span style="font-size:14px"><span style="font-size:14px"><span
+                                style="font-size:14px"></span></span></span></p>
+                        <p style="margin-top:5px; margin-bottom:5px"><span
+                                style="background-color:inherit; font-size:14px">这个时候 如果你对这个已经了解了 ，那就请丢下你的那句话，然后关掉这个网页吧，然后留下的吃瓜群众我们接着看</span>
+                        </p>
+                        <p style="margin-top:5px; margin-bottom:5px; font-size:14px">首先说下我们的实现思路&nbsp;</p>
+                        <p style="margin-top:5px; margin-bottom:5px; font-size:14px">&nbsp; &nbsp;
+                            1.通过给有自定义属性的系统View嵌套一层控件，</p>
+                        <p style="margin-top:5px; margin-bottom:5px; font-size:14px">&nbsp; &nbsp;
+                            &nbsp;2.获取到xml中给系统view赋&#20540;的属性&#20540;</p>
+                        <p style="margin-top:5px; margin-bottom:5px; font-size:14px">&nbsp; &nbsp;
+                            &nbsp;3.然后把自定义的View的属性丢给这个控件，控件去实现这个自定义的属性就可以了</p>
+                        <p style="margin-top:5px; margin-bottom:5px"><span
+                                style="background-color:inherit; font-size:14px">ok，完了 ，就是这么的简单，就是这么的easy，（那边的群众放下手中的西瓜刀，不要急躁，听小司机慢慢道来具体的实现）</span>
+                        </p>
+                        <p style="margin-top:5px; margin-bottom:5px; font-size:14px">准备工作：</p>
+                        <p style="margin-top:5px; margin-bottom:5px; font-size:14px">&nbsp; &nbsp;
+                            a.首先我们要定义一个ViewGroup（继承自LinearLayout的CustomViewLinearLayout）用来包裹系统的View，</p>
+                        <p style="margin-top:5px; margin-bottom:5px; font-size:14px">&nbsp; &nbsp;
+                            b. 自定义的属性的申明，（这里也啰嗦下）在valus下建立一个attrs文件，然后</p>
+                        <p style="margin-top:5px; margin-bottom:5px; font-size:14px"></p>
+<pre code_snippet_id="2208110" snippet_file_name="blog_20170215_1_3097751" name="code" class="html">&lt;!--isChange 是否做个旋转动画 beginColor 开始的颜色  finishColor 结束的颜色--&gt;
+&lt;declare-styleable name=&quot;customViewLinear&quot;&gt;
+    &lt;attr name=&quot;isChange&quot; format=&quot;boolean&quot;&gt;&lt;/attr&gt;
+    &lt;attr name=&quot;beginColor&quot; format=&quot;color&quot;&gt;&lt;/attr&gt;
+    &lt;attr name=&quot;finishColor&quot; format=&quot;color&quot;&gt;&lt;/attr&gt;
+&lt;/declare-styleable&gt;</pre>
+                        <br>
+                        <span style="font-size:14px">c.自定义个控件CoverFragment，实现系统view含有的自定义的属性的效果，这里贴下代码</span><br>
+                        <p></p>
+                        <p style="margin-top:5px; margin-bottom:5px; font-size:14px"><span
+                                style="font-size:14px"></span></p>
+<pre code_snippet_id="2208110" snippet_file_name="blog_20170215_2_7951510" name="code" class="html">public class CoverFragment extends FrameLayout{
+
+
+
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            iniView();
+        }
+    };
+
+    private boolean isChange;
+    private int beginColor;
+    private int finishColor;
+
+
+
+    public void setChange(boolean change) {
+        isChange = change;
+    }
+
+
+    public void setBeginColor(int beginColor) {
+        this.beginColor = beginColor;
+    }
+
+
+    public void setFinishColor(int finishColor) {
+        this.finishColor = finishColor;
+    }
+
+    public CoverFragment(Context context) {
+        super(context);
+        //这里为了看到效果，做了下延迟，不然initView执行的时候判断都是错的
+        handler.sendEmptyMessage(1000);
+    }
+
+    public CoverFragment(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
+    //初始化
+   public void iniView(){
+        if(isChange){//做一次旋转吧
+            float fromXScale = 1.0f;
+            float toScaleX = 0.5f;
+            float fromYScale = 1.0f;
+            float toScaleY = 0.5f;
+            float pivotX = getWidth() / 2;
+            float pivotY = getHeight() / 2;
+            Animation animate = new ScaleAnimation(fromXScale, toScaleX, fromYScale, toScaleY,pivotX, pivotY );
+            animate.setDuration(3000);
+            startAnimation(animate);
+
+        }
+
+        if(beginColor!=-1&amp;&amp;finishColor!=-1){//做一个颜色的渐变
+            if(Build.VERSION.SDK_INT &gt;= 21){
+                ValueAnimator valueAnimator = ValueAnimator.ofArgb(beginColor, finishColor);
+                valueAnimator.setDuration(3000);
+                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        int color = (int)animation.getAnimatedValue();
+                        setBackgroundColor(color);
+                    }
+                });
+                valueAnimator.start();
+            }
+        }
+    }
+}</pre>
+                        <br>
+                        <br>
+                        <p></p>
+                        <p style="margin-top:5px; margin-bottom:5px; font-size:14px"><span
+                                style="font-size:14px"></span></p>
+                        <p style="margin-top:5px; margin-bottom:5px; font-size:14px">好了进入我们的主题了</p>
+                        <p style="margin-top:5px; margin-bottom:5px; font-size:14px">
+                            1.给自定义Viewgroup的系统View套一层CoverFragment</p>
+                        <p style="margin-top:5px; margin-bottom:5px; font-size:14px">&nbsp; &nbsp;
+                            &nbsp; &nbsp;这个里面用到的方法是addView(View child, int index,
+                            ViewGroup.LayoutParams params) ，不考虑到性能代码是</p>
+                        <p style="margin-top:5px; margin-bottom:5px; font-size:14px"></p>
+<pre code_snippet_id="2208110" snippet_file_name="blog_20170215_3_2805270" name="code" class="html">@Override
+public void addView(View child, int index, ViewGroup.LayoutParams params) {
+    
+      CoverFragment cf = new CoverFragment(getContext());//给原始控件嵌套一层的Fragment，
+        
+       cf.addView(child);
+      super.addView(cf, index, params);
+    
+}</pre>
+                        <p></p>
+                        <p style="margin-top:5px; margin-bottom:5px"><span
+                                style="background-color:inherit; font-size:14px">2.</span><span
+                                style="font-size:14px">获取到xml中给系统view赋&#20540;的属性&#20540;</span></p>
+                        <p style="margin-top:5px; margin-bottom:5px"><span
+                                style="background-color:inherit; font-size:14px">&nbsp; &nbsp; 这里我们联想到的是LinearLayout怎么获取xml中的属性，应该是LinearLayout.LayoutParams对的吧，然后是通过generateLayoutParams(AttributeSet attrs)，ok，没毛病吧，那我们也按照这个来进行仿写吧，首先自定义个layoutParams</span>
+                        </p>
+<pre code_snippet_id="2208110" snippet_file_name="blog_20170215_4_2434777" name="code" class="html">//自定义LayoutParams，用来获取自定义的属性
+public static class CustomViewLayoutParams extends LinearLayout.LayoutParams{
+    public boolean isChange;
+    public int beginColor;
+    public int finishColor;
+    public CustomViewLayoutParams(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        TypedArray ta = context.obtainStyledAttributes(attrs,R.styleable.customViewLinear);
+        isChange = ta.getBoolean(R.styleable.customViewLinear_isChange,false);
+        beginColor = ta.getColor(R.styleable.customViewLinear_beginColor, -1);
+        finishColor = ta.getColor(R.styleable.customViewLinear_finishColor,-1);
+        ta.recycle();
+    }
+
+}</pre>
+                        <br>
+                        <span style="font-size:14px">然后改写</span><span style="font-size:14px">generateLayoutParams(AttributeSet attrs)方法</span>
+                        <p style="margin-top:5px; margin-bottom:5px; font-size:14px"></p>
+<pre code_snippet_id="2208110" snippet_file_name="blog_20170215_5_802571" code_snippet_id="2208110"
+     snippet_file_name="blog_20170215_5_802571" name="code" class="html">//拿到child里面的自定义属性
+@Override
+public LayoutParams generateLayoutParams(AttributeSet attrs) {
+    //返回自定义的LayoutParams
+    return new CustomViewLayoutParams(getContext(),attrs);
+}</pre>
+                        <p></p>
+                        <p style="margin-top:5px; margin-bottom:5px"><span
+                                style="background-color:inherit; font-size:14px">好，接下来第三步了</span>
+                        </p>
+                        <p style="margin-top:5px; margin-bottom:5px"><span
+                                style="background-color:inherit; font-size:14px">3.系统View获取到的自定义属性赋&#20540;给</span><span
+                                style="font-size:14px">CoverFragment</span></p>
+                        <p style="margin-top:5px; margin-bottom:5px; font-size:14px">&nbsp; &nbsp;
+                            依旧是在addView方法中，由于generateLayoutParams（）方法是在addView（）之前进行的，所以，这个时候params是带有属性的</p>
+<pre code_snippet_id="2208110" snippet_file_name="blog_20170215_6_3322016" code_snippet_id="2208110"
+     snippet_file_name="blog_20170215_6_3322016" name="code" class="html">@Override
+public void addView(View child, int index, ViewGroup.LayoutParams params) {
+    CustomViewLayoutParams layoutParams = (CustomViewLayoutParams) params;
+    if(isCustomProperty(layoutParams)){//有自定义属性的才给他嵌套控件，并复制值给那个控件
+        CoverFragment cf = new CoverFragment(getContext());//给原始控件嵌套一层的Fragment，
+        //复制属性给CoverFragment
+        cf.setChange(layoutParams.isChange);
+        cf.setBeginColor(layoutParams.beginColor);
+        cf.setFinishColor(layoutParams.finishColor);
+        cf.addView(child);
+        super.addView(cf, index, params);
+    }else{
+        super.addView(child, index, params);
+    }
+}</pre>
+                        <br>
+                        <span style="font-size:14px">ok这样就大功告成了 &nbsp;最后贴一下整个CustomViewLinearLayout的代码吧，</span><br>
+                        <p style="margin-top:5px; margin-bottom:5px">最后说下：
+                            项目中的代码实现在这个demo中看起来很恶心。。。</p>
+                        <p style="margin-top:5px; margin-bottom:5px">&nbsp; &nbsp; &nbsp; &nbsp;
+                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            1.比如为什么要给系统View去套一层view；不可以直接去让系统的View去实现那个属性的效果么</p>
+                        <p style="margin-top:5px; margin-bottom:5px">&nbsp; &nbsp; &nbsp; &nbsp;
+                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p>
+                        <p style="margin-top:5px; margin-bottom:5px">&nbsp;2.在包裹的控件自定义方法中使用handle,(这里的作用是为了让
+                            系统的自定义的属性&#20540;能赋&#20540;到嵌套的控件上，在addView()中自定义嵌套控件的时候立刻执行initView方法是没有自定义的属性&#20540;的，所以延迟1秒让后面的赋&#20540;操作完成，）。</p>
+                        <p style="margin-top:5px; margin-bottom:5px">&nbsp; &nbsp; &nbsp; &nbsp;
+                            这个问题在你自定义一个滑动的控件的时候，当滑动到显示那个系统控件才做自定义属性的操作时，按照demo中的3个步骤就是没错的。而在这个demo中最好的方式是不嵌套view的，我不过是为了走这3步而写出来的。。。</p>
+                        <span style=""></span><span style=""></span><br>
+                        <br>
+                        <br>
+                        <p style="margin-top:5px; margin-bottom:5px; font-size:14px"><span
+                                style="font-size:14px"><br>
+</span></p>
+                        <p style="margin-top:5px; margin-bottom:5px; font-size:14px"><span
+                                style="font-size:14px"><br>
+</span></p>
+                        <br>
+
+                    </div>
+                    <link rel="stylesheet" href="http://static.blog.csdn.net/css/blog_detail.css"/>
+                </div>
+
+                <div>
+                    <ins data-revive-zoneid="206"
+                         data-revive-id="8c38e720de1c90a6f6ff52f3f89c4d57"></ins>
+                </div>
+                <link rel="stylesheet" href="http://static.blog.csdn.net/css/replace.css"/>
+                <script type="text/javascript"
+                        src="http://static.blog.csdn.net/scripts/comment.js"></script>
+                <div class="tag_list" style="display:none"></div>
+                <script language="javascript" type="text/javascript"
+                        src="http://ads.csdn.net/js/async_new.js"></script>
+                <div class="clear">
+                </div>
+            </div>
+
+        </div>
+
+        <script type="text/javascript" src="http://c.csdnimg.cn/rabbit/cnick/cnick.js"></script>
+        <script type="text/javascript"
+                src="http://static.blog.csdn.net/scripts/newblog.min.js"></script>
+        <script type="text/javascript"
+                src="http://medal.blog.csdn.net/showblogmedal.ashx?blogid=5638093"></script>
+        <script type="text/javascript"
+                src="http://static.blog.csdn.net/scripts/JavaScript1.js"></script>
+        <script type="text/javascript"
+                src="http://www.csdn.net/ui/scripts/Csdn/counter.js"></script>
+    </div>
+    <link href="http://c.csdnimg.cn/comm_ask/css/ask_float_block.css" type="text/css"
+          rel="stylesheet"/>
+    <script language='JavaScript' type='text/javascript'
+            src='http://c.csdnimg.cn/comm_ask/js/libs/wmd.js'></script>
+    <script language='JavaScript' type='text/javascript'
+            src='http://c.csdnimg.cn/comm_ask/js/libs/showdown.js'></script>
+    <script language='JavaScript' type='text/javascript'
+            src='http://c.csdnimg.cn/comm_ask/js/libs/prettify.js'></script>
+    <script language='JavaScript' type='text/javascript'
+            src='http://c.csdnimg.cn/comm_ask/js/apps/ask_float_block.js'></script>
+
+    <link rel="stylesheet" href="http://static.blog.csdn.net/css/blog_code.css"/>
+    <script type="text/javascript" src="http://static.blog.csdn.net/scripts/saveToCode.js"></script>
+    <script type="text/javascript" src="//csdnimg.cn/rabbit/tracking-ad/main.js?75eacd8"></script>
+
+    <link rel="stylesheet" href="http://static.blog.csdn.net/css/fa.css"/>
+
+</body>
+</html>   
+ 

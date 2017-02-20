@@ -38,6 +38,8 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment {
         initView(savedInstanceState);
         if (mPresenter == null) {
             mPresenter = createPresenter();
+        }
+        if (mPresenter != null) {
             mPresenter.presenterStart();
         }
     }
