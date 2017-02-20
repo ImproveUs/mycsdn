@@ -36,7 +36,10 @@ public class DetialArticleFragment extends BaseFragment<DetialArticlePresenter> 
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        mArticleUrl = getArguments().getString(DetailArticleActivity.ARTICLE_URL);
+        try {
+            mArticleUrl = getArguments().getString(DetailArticleActivity.ARTICLE_URL);
+        } catch (Exception e) {
+        }
         newContent = (TextView) getView().findViewById(R.id.detial_article_text);
         //TODO 地址未处理完
     }
