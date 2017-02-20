@@ -73,8 +73,8 @@
         android:layout_centerInParent="true"
         android:background="@drawable/chose_type"/>
    </RelativeLayout>
-
-    <android.support.v7.widget.RecyclerView
+    <!--<android.support.v7.widget.RecyclerView-->
+    <com.superrecycleview.superlibrary.recycleview.swipemenu.SuperSwipeMenuRecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
