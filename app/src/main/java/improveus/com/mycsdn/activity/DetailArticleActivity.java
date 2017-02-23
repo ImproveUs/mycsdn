@@ -3,7 +3,6 @@ package improveus.com.mycsdn.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 
@@ -41,7 +40,7 @@ public class DetailArticleActivity extends BaseFragmentActivity {
         Intent intent = getIntent();
         String articleUrl = null;
         try {
-            articleUrl = intent.getStringExtra("ARTICLE_URL");
+            articleUrl = intent.getStringExtra("TITLEURL");
         } catch (Exception e) {
             //TODO 解析异常
         }

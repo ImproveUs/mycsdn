@@ -1,10 +1,19 @@
 package improveus.com.mycsdn.fragment;
 
 
+import android.app.ActivityOptions;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.superrecycleview.superlibrary.recycleview.ProgressStyle;
 import com.superrecycleview.superlibrary.recycleview.SuperRecyclerView;
@@ -14,6 +23,7 @@ import java.util.ArrayList;
 
 import improveus.com.mycsdn.Adapter.ArticleAdapter;
 import improveus.com.mycsdn.R;
+import improveus.com.mycsdn.activity.SearchActivity;
 import improveus.com.mycsdn.manage.ListRefreshType;
 import improveus.com.mycsdn.model.MyCsdnModel;
 import improveus.com.mycsdn.mvpview.MainMvpView;
@@ -29,6 +39,10 @@ public class MainFragment extends BaseFragment implements MainMvpView {
 
     private SuperSwipeMenuRecyclerView articleView;
     private ArticleAdapter articleAdapter;
+    private ImageButton setting;
+    private RelativeLayout search_relativeLayout;
+    private ImageButton chose_type;
+    private Button chose_type_cancle;
     public static MainFragment getInstance() {
         return new MainFragment();
     }
@@ -42,6 +56,37 @@ public class MainFragment extends BaseFragment implements MainMvpView {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        setting = (ImageButton) contentView.findViewById(R.id.setting);
+        setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                call2User("11");
+            }
+        });
+        search_relativeLayout = (RelativeLayout) contentView.findViewById(R.id.search_relativeLayout);
+        chose_type = (ImageButton) contentView.findViewById(R.id.chose_type);
+        chose_type_cancle = (Button) contentView.findViewById(R.id.chose_type_cancle);
+        search_relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chose_type_cancle.setVisibility(View.VISIBLE);
+                chose_type.setVisibility(View.GONE);
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
+                    startActivity(intent,ActivityOptions.makeSceneTransitionAnimation(getActivity(),search_relativeLayout,"mysear_linear").toBundle());
+                }else{
+                    ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeScaleUpAnimation(
+                            search_relativeLayout,
+                            0,
+                            0,
+                            0,
+                            0);
+                    ActivityCompat.startActivity(getActivity(),intent,optionsCompat.toBundle());
+                }
+            }
+        });
+
+
         articleView = (SuperSwipeMenuRecyclerView) contentView.findViewById(R.id.recyclerView);
         LinearLayoutManager manager =new LinearLayoutManager(getContext(), LinearLayout.VERTICAL,false);
         articleView.setLayoutManager(manager);
@@ -88,9 +133,12 @@ public class MainFragment extends BaseFragment implements MainMvpView {
 
     }
 
-
-
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        chose_type_cancle.setVisibility(View.GONE);
+        chose_type.setVisibility(View.VISIBLE);
+    }
 
     private ArrayList<MyCsdnModel> data = new ArrayList<>();
     @Override
@@ -103,7 +151,6 @@ public class MainFragment extends BaseFragment implements MainMvpView {
             }else{
                 articleAdapter = new ArticleAdapter(getContext(),data);
                 articleView.setAdapter(articleAdapter);
-
             }
         }else{
             if(response==null||response.size()==0){

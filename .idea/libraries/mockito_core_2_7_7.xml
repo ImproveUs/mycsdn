@@ -1,10 +1,11 @@
 <component name="libraryTable">
   <library name="mockito-core-2.7.7">
     <CLASSES>
-      <root url="jar://F:/androidstudio/Android-Universal-Image-Loader-master/gradle/wrapper/caches/modules-2/files-2.1/org.mockito/mockito-core/2.7.7/9375d3a76d9884370500f2597cac5f1f72fa8eed/mockito-core-2.7.7.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mockito/mockito-core/2.7.7/9375d3a76d9884370500f2597cac5f1f72fa8eed/mockito-core-2.7.7.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mockito/mockito-core/2.7.7/3025e6d648f29ffdbd5567a4577a48af4ff838a8/mockito-core-2.7.7-sources.jar!/" />
       <root url="jar://F:/androidstudio/Android-Universal-Image-Loader-master/gradle/wrapper/caches/modules-2/files-2.1/org.mockito/mockito-core/2.7.7/3025e6d648f29ffdbd5567a4577a48af4ff838a8/mockito-core-2.7.7-sources.jar!/" />
     </SOURCES>
   </library>

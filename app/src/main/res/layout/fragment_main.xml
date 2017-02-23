@@ -9,15 +9,16 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="45dp"
         android:layout_gravity="top"
         android:background="@color/red_shallow"
         android:orientation="horizontal"
         >
 
         <ImageButton
-            android:layout_width="70dp"
-            android:layout_height="40dp"
+            android:id="@+id/setting"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
             android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
             android:src="@drawable/ic_setting"
@@ -34,44 +35,61 @@
 
 
    <RelativeLayout
+       android:id="@+id/search_relativeLayout"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
+       android:transitionName="mysear_linear"
        android:background="@color/search_back">
     <LinearLayout
+        android:id="@+id/search_linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/chose_type"
+        android:layout_toLeftOf="@+id/chose_type_lear"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_centerInParent="true"
+
         android:background="@drawable/shpae_white"
         >
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginTop="4dp"
             android:layout_gravity="center_vertical"
             android:src="@drawable/ic_search"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="8dp"
-            android:singleLine="true"
-            android:layout_marginLeft="5dp"
-            android:paddingBottom="8dp"
-            android:background="@null"/>
-
 
     </LinearLayout>
+       <LinearLayout
+           android:layout_width="wrap_content"
+           android:id="@+id/chose_type_lear"
+           android:layout_centerInParent="true"
+           android:layout_alignParentRight="true"
+           android:layout_height="wrap_content">
     <ImageButton
         android:id="@+id/chose_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginRight="10dp"
-        android:layout_centerInParent="true"
-        android:background="@drawable/chose_type"/>
+        android:visibility="visible"
+        android:src="@drawable/chose_type"
+        android:background="@android:color/transparent"
+        />
+       <Button
+           android:id="@+id/chose_type_cancle"
+           android:layout_width="45dp"
+           android:layout_height="30dp"
+           android:visibility="gone"
+           android:layout_marginTop="2dp"
+           android:layout_marginBottom="2dp"
+           android:layout_marginRight="5dp"
+           android:layout_marginLeft="5dp"
+           android:translationZ="5dp"
+           android:text="取消"
+           android:background="@drawable/btn_cancle"/>
+       </LinearLayout>
    </RelativeLayout>
     <!--<android.support.v7.widget.RecyclerView-->
     <com.superrecycleview.superlibrary.recycleview.swipemenu.SuperSwipeMenuRecyclerView

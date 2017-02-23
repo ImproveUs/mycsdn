@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/search_relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:transitionName="mysear_linear"
+        android:background="@color/search_back">
+        <LinearLayout
+            android:id="@+id/search_linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/chose_type"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_centerInParent="true"
+
+            android:background="@drawable/shpae_white"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="1dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_search"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:singleLine="true"
+                android:textSize="@dimen/small_text_size"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="8dp"
+                android:background="@null"/>
+
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/chose_type"
+            android:layout_width="45dp"
+            android:layout_height="30dp"
+
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:translationZ="5dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:text="取消"
+            android:background="@drawable/btn_cancle"/>
+    </RelativeLayout>
+
+</LinearLayout>
