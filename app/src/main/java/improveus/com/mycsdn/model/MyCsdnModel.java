@@ -82,4 +82,19 @@ public class MyCsdnModel {
                 ", \n iconType='" + iconType + '\'' +
                 "\n }";
     }
+
+    /**
+     * 这里重写方法通过文章地址来判断是否是同一篇文章
+     *
+     * @param obj
+     * @return
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof MyCsdnModel) {
+            MyCsdnModel csdnModel = (MyCsdnModel) obj;
+            return this.titleUrl.equals(csdnModel.getTitleUrl());
+        }
+        return super.equals(obj);
+    }
 }
