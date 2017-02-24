@@ -34,7 +34,6 @@ public class JsoupForH5 {
         KLog.i("运行线程" + Thread.currentThread().getName());
         ArrayList<MyCsdnModel> myCsdnModels = new ArrayList<MyCsdnModel>();
         Document parse = Jsoup.parse(responseBody.string());
-        KLog.i(parse.html());
         Elements list_item_new = parse.getElementsByClass("list_item");//获取标题列表节点
         for (Element itemNew : list_item_new) {//遍历
             MyCsdnModel myCsdnModel = new MyCsdnModel();

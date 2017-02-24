@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              android:baselineAligned="false">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:orientation="vertical">
 
 
     <RelativeLayout
@@ -12,89 +11,91 @@
         android:layout_height="45dp"
         android:layout_gravity="top"
         android:background="@color/red_shallow"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/setting"
             android:layout_width="50dp"
             android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_setting"
+            android:layout_marginLeft="10dp"
             android:background="@drawable/setting_background"
-            />
+            android:src="@drawable/ic_setting" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_centerInParent="true"
+            android:layout_gravity="center"
             android:layout_marginRight="45dp"
-            android:text="个人博客"/>
+            android:text="个人博客" />
     </RelativeLayout>
 
 
-   <RelativeLayout
-       android:id="@+id/search_relativeLayout"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:transitionName="mysear_linear"
-       android:background="@color/search_back">
-    <LinearLayout
-        android:id="@+id/search_linear"
+    <RelativeLayout
+        android:id="@+id/search_relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/chose_type_lear"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_centerInParent="true"
+        android:background="@color/search_back"
+        android:transitionName="mysear_linear">
 
-        android:background="@drawable/shpae_white"
-        >
-        <ImageView
+        <LinearLayout
+            android:id="@+id/search_linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_toLeftOf="@+id/chose_type_lear"
+
+            android:background="@drawable/shpae_white">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="4dp"
+                android:src="@drawable/ic_search" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/chose_type_lear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:layout_marginBottom="3dp"
-            android:layout_marginTop="4dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_search"/>
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true">
 
-    </LinearLayout>
-       <LinearLayout
-           android:layout_width="wrap_content"
-           android:id="@+id/chose_type_lear"
-           android:layout_centerInParent="true"
-           android:layout_alignParentRight="true"
-           android:layout_height="wrap_content">
-    <ImageButton
-        android:id="@+id/chose_type"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginRight="10dp"
-        android:visibility="visible"
-        android:src="@drawable/chose_type"
-        android:background="@android:color/transparent"
-        />
-       <Button
-           android:id="@+id/chose_type_cancle"
-           android:layout_width="45dp"
-           android:layout_height="30dp"
-           android:visibility="gone"
-           android:layout_marginTop="2dp"
-           android:layout_marginBottom="2dp"
-           android:layout_marginRight="5dp"
-           android:layout_marginLeft="5dp"
-           android:translationZ="5dp"
-           android:text="取消"
-           android:background="@drawable/btn_cancle"/>
-       </LinearLayout>
-   </RelativeLayout>
+            <ImageButton
+                android:id="@+id/chose_type"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/chose_type"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/chose_type_cancle"
+                android:layout_width="45dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/btn_cancle"
+                android:text="取消"
+                android:translationZ="5dp"
+                android:visibility="gone" />
+        </LinearLayout>
+    </RelativeLayout>
     <!--<android.support.v7.widget.RecyclerView-->
     <com.superrecycleview.superlibrary.recycleview.swipemenu.SuperSwipeMenuRecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
 </LinearLayout>

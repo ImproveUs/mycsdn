@@ -3,7 +3,8 @@ package improveus.com.mycsdn.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
-import android.widget.TextView;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 
 import improveus.com.mycsdn.R;
 import improveus.com.mycsdn.activity.DetailArticleActivity;
@@ -16,8 +17,9 @@ import improveus.com.mycsdn.presenter.DetialArticlePresenter;
  */
 public class DetialArticleFragment extends BaseFragment<DetialArticlePresenter> implements DetialArticleMvpView {
 
-    private TextView newContent;
+    //    private TextView newContent;
     private String mArticleUrl;
+    private WebView webView;
 
     public static DetialArticleFragment getInstance(@NonNull String articleUrl) {
         DetialArticleFragment detialArticleFragment = new DetialArticleFragment();
@@ -40,20 +42,24 @@ public class DetialArticleFragment extends BaseFragment<DetialArticlePresenter> 
             mArticleUrl = getArguments().getString(DetailArticleActivity.ARTICLE_URL);
         } catch (Exception e) {
         }
-        newContent = (TextView) getView().findViewById(R.id.detial_article_text);
+        //这里暂时不适用富文本
+//        newContent = (TextView) getView().findViewById(R.id.detial_article_text);
         //TODO 地址未处理完
+        webView = (WebView) getView().findViewById(R.id.webview);
     }
 
     @Override
     protected DetialArticlePresenter createPresenter() {
-        return new DetialArticlePresenter(this);
+        return new DetialArticlePresenter(this,mArticleUrl);
     }
 
     @Override
-    public void onNext(String article_content) {
-        newContent.setText("-----------------------开始----------------------\n"
-                + article_content
-                + "\n-----------------------结束----------------------");
+    public void onNext(String articleContent) {
+        webView.getSettings().setDefaultTextEncodingName("utf-8");
+        webView.getSettings().setUseWideViewPort(true);
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+        webView.loadData(articleContent, "text/html; charset=UTF-8", null);
     }
 
 }

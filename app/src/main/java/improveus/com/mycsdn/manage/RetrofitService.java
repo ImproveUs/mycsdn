@@ -17,6 +17,6 @@ public interface RetrofitService {
     Observable<ResponseBody> getBlogList(@Path("page") int page);
 
     //读取文章
-    @GET("u013424496/article/details/{articleid}")
-    Observable<ResponseBody> getBlogDetial(@Path("articleid") String articleid);
+    @GET("{articleUrl}")
+    Observable<ResponseBody> getBlogDetial(@Path("articleUrl") String articleUrl);
 }

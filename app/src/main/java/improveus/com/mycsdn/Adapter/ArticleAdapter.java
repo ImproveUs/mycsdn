@@ -20,10 +20,11 @@ import improveus.com.mycsdn.model.MyCsdnModel;
  * pengsizheng@qq.com
  */
 
-public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>{
+public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder> {
     private Context context;
     private List<MyCsdnModel> data;
-    public ArticleAdapter (Context context,@NonNull List<MyCsdnModel> data ){
+
+    public ArticleAdapter(Context context, List<MyCsdnModel> data) {
         this.context = context;
         this.data = data;
     }
@@ -31,7 +32,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
     //当viewholder创建的时候回调 加载xml布局
     @Override
     public ArticleAdapter.ArticleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = View.inflate(context, R.layout.item_main_recycle,null);
+        View view = View.inflate(context, R.layout.item_main_recycle, null);
         return new ArticleViewHolder(view);
     }
 
@@ -40,12 +41,12 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
     public void onBindViewHolder(ArticleAdapter.ArticleViewHolder holder, int position) {
         final MyCsdnModel myCsdnModel = data.get(position);
         holder.title_name.setText(myCsdnModel.getTitle());
-        if (myCsdnModel.getIconType()!=null){
-            if("Original".equals(myCsdnModel.getIconType())){//原创
+        if (myCsdnModel.getIconType() != null) {
+            if ("Original".equals(myCsdnModel.getIconType())) {//原创
 
-            }else if ("Repost".equals(myCsdnModel.getIconType())){//转载
+            } else if ("Repost".equals(myCsdnModel.getIconType())) {//转载
 
-            }else {//翻译
+            } else {//翻译
 
             }
         }
@@ -58,9 +59,10 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, DetailArticleActivity.class);
-                intent.putExtra("TITLEURL",myCsdnModel.getTitleUrl());
-                context.startActivity(intent);
+//                Intent intent = new Intent(context, DetailArticleActivity.class);
+//                intent.putExtra(DetailArticleActivity.ARTICLE_URL, myCsdnModel.getTitleUrl());
+//                context.startActivity(intent);
+                context.startActivity(DetailArticleActivity.getIntent(context, myCsdnModel.getTitleUrl()));
             }
         });
 
@@ -68,20 +70,21 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
 
     @Override
     public int getItemCount() {
-        if(data!=null&&data.size()!=0){
+        if (data != null && data.size() != 0) {
             return data.size();
-        }else{
+        } else {
             return 0;
         }
     }
 
-    class  ArticleViewHolder extends  RecyclerView.ViewHolder{
+    class ArticleViewHolder extends RecyclerView.ViewHolder {
         private TextView title_name;//标题
         private ImageView ic_original;//是否原创
         private TextView title_content;//简要内容
         private TextView main_time;//创建日期
         private TextView read_number;//阅读条数
         private TextView comment_num;//评论条数
+
         public ArticleViewHolder(View itemView) {
             super(itemView);
             title_name = (TextView) itemView.findViewById(R.id.title_name);

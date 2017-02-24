@@ -24,8 +24,8 @@ public class DetailArticleActivity extends BaseFragmentActivity {
      * @param articleUrl
      * @return
      */
-    public final Intent getIntent(Context context, @NonNull String articleUrl) {
-        Intent intent = new Intent(context, this.getClass());
+    public static final Intent getIntent(Context context, @NonNull String articleUrl) {
+        Intent intent = new Intent(context, DetailArticleActivity.class);
         if (!TextUtils.isEmpty(articleUrl))
             intent.putExtra(ARTICLE_URL, articleUrl);
         return intent;
@@ -40,7 +40,7 @@ public class DetailArticleActivity extends BaseFragmentActivity {
         Intent intent = getIntent();
         String articleUrl = null;
         try {
-            articleUrl = intent.getStringExtra("TITLEURL");
+            articleUrl = intent.getStringExtra(ARTICLE_URL);
         } catch (Exception e) {
             //TODO 解析异常
         }
