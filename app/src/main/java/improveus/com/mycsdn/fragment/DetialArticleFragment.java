@@ -1,10 +1,33 @@
 package improveus.com.mycsdn.fragment;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.PictureDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.text.Editable;
+import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.TextView;
+
+import com.socks.library.KLog;
+
+import org.xml.sax.XMLReader;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.concurrent.ExecutionException;
 
 import improveus.com.mycsdn.R;
 import improveus.com.mycsdn.activity.DetailArticleActivity;
@@ -17,7 +40,7 @@ import improveus.com.mycsdn.presenter.DetialArticlePresenter;
  */
 public class DetialArticleFragment extends BaseFragment<DetialArticlePresenter> implements DetialArticleMvpView {
 
-    //    private TextView newContent;
+    private TextView newContent;
     private String mArticleUrl;
     private WebView webView;
 
@@ -43,23 +66,99 @@ public class DetialArticleFragment extends BaseFragment<DetialArticlePresenter> 
         } catch (Exception e) {
         }
         //这里暂时不适用富文本
-//        newContent = (TextView) getView().findViewById(R.id.detial_article_text);
+        newContent = (TextView) getView().findViewById(R.id.detial_article_text);
         //TODO 地址未处理完
         webView = (WebView) getView().findViewById(R.id.webview);
     }
 
     @Override
     protected DetialArticlePresenter createPresenter() {
-        return new DetialArticlePresenter(this,mArticleUrl);
+        return new DetialArticlePresenter(this, mArticleUrl);
     }
 
     @Override
     public void onNext(String articleContent) {
-        webView.getSettings().setDefaultTextEncodingName("utf-8");
-        webView.getSettings().setUseWideViewPort(true);
-        webView.getSettings().setLoadWithOverviewMode(true);
-        webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
-        webView.loadData(articleContent, "text/html; charset=UTF-8", null);
+        newContent.setText(Html.fromHtml(articleContent, new MImageGetter(), new MTagHandler()));
     }
 
+    /**
+     * 处理富文本图片的帮助类
+     */
+    private class MImageGetter implements Html.ImageGetter {
+
+        @Override
+        public Drawable getDrawable(String source) {
+            MTask mTask = new MTask();
+            AsyncTask<String, Void, Drawable> execute = mTask.execute(source);
+            try {
+                return execute.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+    /**
+     * 由于要获取网络图片这里先开启异步任务
+     */
+    private class MTask extends AsyncTask<String, Void, Drawable> {
+
+        @Override
+        protected Drawable doInBackground(String... params) {
+            Drawable drawableByNetWork = null;
+            try {
+                drawableByNetWork = getDrawableByNetWork(params[0]);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return drawableByNetWork;
+        }
+    }
+
+    /**
+     * 根据地址返回一个drawable对象
+     *
+     * @param url
+     * @return
+     * @throws IOException
+     */
+    private Drawable getDrawableByNetWork(String url) throws IOException {
+        Drawable drawable = null;
+        URL uRl = new URL(url);
+        HttpURLConnection urlConnection = (HttpURLConnection) uRl.openConnection();
+        urlConnection.setConnectTimeout(10000);
+        urlConnection.setReadTimeout(10000);
+        if (urlConnection.getResponseCode() == 200) {
+            InputStream inputStream = urlConnection.getInputStream();
+            Bitmap bitmap = null;
+            try {
+                bitmap = BitmapFactory.decodeStream(inputStream);
+                drawable = new BitmapDrawable(getResources(), bitmap);
+                drawable.setBounds(0, 0, drawable.getIntrinsicWidth(),
+                        drawable.getIntrinsicHeight());
+                inputStream.close();
+                urlConnection.disconnect();
+            } catch (Exception e) {
+            }
+        }
+        return drawable;
+    }
+
+    /**
+     * 处理富文本中不能识别的标签
+     */
+    private class MTagHandler implements Html.TagHandler {
+
+        @Override
+        public void handleTag(boolean opening, String tag, Editable output, XMLReader xmlReader) {
+            if (tag.equalsIgnoreCase("pre") && opening) {
+                output.append("\n----------代码开始----------\n");
+            } else if (tag.equalsIgnoreCase("pre") && !opening) {
+                output.append("\n----------代码结束----------\n");
+            }
+        }
+    }
 }
