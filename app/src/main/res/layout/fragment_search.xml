@@ -56,5 +56,11 @@
             android:text="取消"
             android:background="@drawable/btn_cancle"/>
     </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="测试"
+        android:gravity="center"
+        />
 
 </LinearLayout>
