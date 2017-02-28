@@ -5,18 +5,23 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
+import android.media.tv.TvView;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.Html;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.BackgroundColorSpan;
 import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
 
 import com.socks.library.KLog;
+import com.socks.library.klog.XmlLog;
 
 import org.xml.sax.XMLReader;
 
@@ -154,11 +159,33 @@ public class DetialArticleFragment extends BaseFragment<DetialArticlePresenter> 
 
         @Override
         public void handleTag(boolean opening, String tag, Editable output, XMLReader xmlReader) {
+            //1 判断标签的开始
             if (tag.equalsIgnoreCase("pre") && opening) {
-                output.append("\n----------代码开始----------\n");
+                //2 如果进来则说明当前文本匹配到了pre的开始,这里为其打上一个标记pre,这里开始的位置就是length第三个参数无效
+                output.setSpan(new Pre(), output.length(), output.length(), 1);
+                //3 判断标签的结束
             } else if (tag.equalsIgnoreCase("pre") && !opening) {
-                output.append("\n----------代码结束----------\n");
+                //4 获取这个标记
+                Pre[] spans = output.getSpans(0, output.length(), Pre.class);
+                if (spans.length == 0) {
+                    //5 标记没获取到  那么自动被忽略
+                    output.append("\n----------代码提前结束----------\n");
+                    return;
+                } else {
+                    //6 获取最新的一个标记Pre
+                    Pre span = spans[spans.length - 1];
+                    //7 获取标记的开始位置
+                    int where = output.getSpanStart(span);
+                    //8 移除标记
+                    output.removeSpan(span);
+                    //9 设置文子渲染
+                    output.setSpan(new BackgroundColorSpan(0XFF0094FF), where, output.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
             }
         }
+    }
+
+    private class Pre {
+
     }
 }
