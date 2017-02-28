@@ -88,6 +88,9 @@ public class DetialArticleFragment extends BaseFragment<DetialArticlePresenter> 
 
     /**
      * 处理富文本图片的帮助类
+     * 只有一个实现方法  每当img标签被匹配到(开始标签各匹配一次)就会调用实现方法获取drawable对象用于显示
+     * 如果返回空则显示默认的空图
+     * com.android.internal.R.drawable.unknown_image
      */
     private class MImageGetter implements Html.ImageGetter {
 
@@ -154,6 +157,8 @@ public class DetialArticleFragment extends BaseFragment<DetialArticlePresenter> 
 
     /**
      * 处理富文本中不能识别的标签
+     * 这里只有一个实现方法handleTag(????)每次文本匹配到不能识别的标签(不管是开始还是结束)就会调用这个方法
+     * 这里用于自己处理不能识别的标签
      */
     private class MTagHandler implements Html.TagHandler {
 
