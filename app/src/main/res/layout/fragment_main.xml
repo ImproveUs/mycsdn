@@ -27,6 +27,8 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_gravity="center"
+            android:textSize="@dimen/large_text_size"
+            android:textColor="@android:color/white"
             android:layout_marginRight="45dp"
             android:text="个人博客" />
     </RelativeLayout>

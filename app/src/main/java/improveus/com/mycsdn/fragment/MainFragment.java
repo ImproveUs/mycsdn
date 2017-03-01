@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import improveus.com.mycsdn.Adapter.ArticleAdapter;
 import improveus.com.mycsdn.R;
 import improveus.com.mycsdn.activity.SearchActivity;
+import improveus.com.mycsdn.activity.SettingActivity;
 import improveus.com.mycsdn.manage.ListRefreshType;
 import improveus.com.mycsdn.model.MyCsdnModel;
 import improveus.com.mycsdn.mvpview.MainMvpView;
@@ -60,7 +61,9 @@ public class MainFragment extends BaseFragment implements MainMvpView {
         setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                call2User("11");
+                Intent intent  = SettingActivity.getIntent(getActivity());
+                startActivity(intent);
+
             }
         });
         search_relativeLayout = (RelativeLayout) contentView.findViewById(R.id.search_relativeLayout);

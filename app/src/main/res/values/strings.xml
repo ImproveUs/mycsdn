@@ -6,6 +6,22 @@
     <string name="item_main_time">2017-02-16</string>
     <string name="item_main_comment_number">评论数：12</string>
     <string name="item_main_read_number">阅读量：1103</string>
-    
+
+
+    <string name="setting">设置</string>
+    <string name="back">返回</string>
+
+
+    <string name="setting_arctile_size">文章字号</string>
+    <string name="setting_change_version">检查更新</string>
+    <string name="setting_clear_cache">清除缓存</string>
+    <string name="setting_get_us">联系我们</string>
+    <string name="setting_weixin">微信公众号</string>
+    <string name="setting_xinlang">新浪微博</string>
+    <string name="setting_mail">电子邮箱</string>
+    <string name="setting_other">其他</string>
+    <string name="share_apk">分享读博客应用</string>
+    <string name="share_weixin">分享读博客微信公众号</string>
+    <string name="share_about_opean">关于开发者</string>
 
 </resources>

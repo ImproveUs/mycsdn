@@ -1,7 +1,5 @@
 package improveus.com.mycsdn.presenter;
 
-import com.socks.library.KLog;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
