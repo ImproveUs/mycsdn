@@ -44,6 +44,7 @@ public class MainFragment extends BaseFragment implements MainMvpView {
     private RelativeLayout search_relativeLayout;
     private ImageButton chose_type;
     private Button chose_type_cancle;
+
     public static MainFragment getInstance() {
         return new MainFragment();
     }
@@ -75,25 +76,25 @@ public class MainFragment extends BaseFragment implements MainMvpView {
                 chose_type_cancle.setVisibility(View.VISIBLE);
                 chose_type.setVisibility(View.GONE);
                 Intent intent = new Intent(getActivity(), SearchActivity.class);
-                if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
-                    startActivity(intent,ActivityOptions.makeSceneTransitionAnimation(getActivity(),search_relativeLayout,"mysear_linear").toBundle());
-                }else{
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(getActivity(), search_relativeLayout, "mysear_linear").toBundle());
+                } else {
                     ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeScaleUpAnimation(
                             search_relativeLayout,
                             0,
                             0,
                             0,
                             0);
-                    ActivityCompat.startActivity(getActivity(),intent,optionsCompat.toBundle());
+                    ActivityCompat.startActivity(getActivity(), intent, optionsCompat.toBundle());
                 }
             }
         });
 
 
         articleView = (SuperSwipeMenuRecyclerView) contentView.findViewById(R.id.recyclerView);
-        LinearLayoutManager manager =new LinearLayoutManager(getContext(), LinearLayout.VERTICAL,false);
+        LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayout.VERTICAL, false);
         articleView.setLayoutManager(manager);
-        articleView.addItemDecoration(new RecyclerViewDivider(getContext(),LinearLayoutManager.HORIZONTAL,1,ContextCompat.getColor(getContext(),R.color.divide_gray_color)));
+        articleView.addItemDecoration(new RecyclerViewDivider(getContext(), LinearLayoutManager.HORIZONTAL, 1, ContextCompat.getColor(getContext(), R.color.divide_gray_color)));
 
         //刷新和加载
         articleView.setRefreshEnabled(true);
@@ -107,7 +108,7 @@ public class MainFragment extends BaseFragment implements MainMvpView {
             @Override
             public void onRefresh() {
                 mMainPresenter.getBlogList(ListRefreshType.RESRESH_TYPE);
-             }
+            }
 
             @Override
             public void onLoadMore() {
@@ -119,14 +120,14 @@ public class MainFragment extends BaseFragment implements MainMvpView {
 
     @Override
     protected BasePresenter createPresenter() {
-        return mMainPresenter =new MainPresenter(this);
+        return mMainPresenter = new MainPresenter(this);
     }
 
     @Override
     public void onDataCompleted(ListRefreshType type) {
-        if(type==ListRefreshType.RESRESH_TYPE){
+        if (type == ListRefreshType.RESRESH_TYPE) {
             articleView.completeRefresh();
-        }else{
+        } else {
             articleView.completeLoadMore();
         }
     }
@@ -144,25 +145,32 @@ public class MainFragment extends BaseFragment implements MainMvpView {
     }
 
     private ArrayList<MyCsdnModel> data = new ArrayList<>();
+
     @Override
     public void onDataNext(ListRefreshType type, ArrayList<MyCsdnModel> response) {
-        if (type==ListRefreshType.RESRESH_TYPE){//刷新
+        if (type == ListRefreshType.RESRESH_TYPE) {//刷新
             data.clear();
             data.addAll(response);
-            if(articleAdapter!=null){//考虑到第一次加载
+            if (articleAdapter != null) {//考虑到第一次加载
                 articleAdapter.notifyDataSetChanged();
-            }else{
-                articleAdapter = new ArticleAdapter(getContext(),data);
+            } else {
+                articleAdapter = new ArticleAdapter(getContext(), data);
                 articleView.setAdapter(articleAdapter);
             }
-        }else{
-            if(response==null||response.size()==0){
+        } else {
+            if (response == null || response.size() == 0) {
                 articleView.setNoMore(true);
-            }else {
+            } else {
                 data.addAll(response);
                 articleAdapter.notifyDataSetChanged();
             }
         }
+    }
 
+    @Override
+    public MyCsdnModel getFirstCsdnData() {
+        if (articleAdapter != null && articleAdapter.getItemCount() > 0)
+            return articleAdapter.getDataInList(0);
+        return null;
     }
 }
