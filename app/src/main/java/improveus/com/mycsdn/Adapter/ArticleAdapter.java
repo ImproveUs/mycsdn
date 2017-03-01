@@ -77,6 +77,15 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
         }
     }
 
+    /**
+     * 返回对应位置的对象
+     *
+     * @return
+     */
+    public MyCsdnModel getDataInList(int position) {
+        return data.get(position);
+    }
+
     class ArticleViewHolder extends RecyclerView.ViewHolder {
         private TextView title_name;//标题
         private ImageView ic_original;//是否原创

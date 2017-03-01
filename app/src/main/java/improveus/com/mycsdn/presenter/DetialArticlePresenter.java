@@ -1,22 +1,12 @@
 package improveus.com.mycsdn.presenter;
 
-import android.text.TextUtils;
-
-import com.socks.library.KLog;
-
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
-import org.jsoup.select.Elements;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.List;
 
-import improveus.com.mycsdn.MyCsdnApplication;
 import improveus.com.mycsdn.manage.RetrofitManage;
 import improveus.com.mycsdn.mvpview.DetialArticleMvpView;
 import okhttp3.ResponseBody;
@@ -66,24 +56,24 @@ public class DetialArticlePresenter implements BasePresenter {
 //                                        stringBuilder.append("\n#3#\n" + pre);
 //                                    }
                                     stringBuilder.append(node.toString());
-                                    StringBuilder sb = new StringBuilder();
-                                    try {
-                                        InputStream in = MyCsdnApplication.getAppContext().getResources().getAssets().open("detialmodel.html");
-                                        String content = "";
-                                        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-                                        while ((content = reader.readLine()) != null) {
-                                            sb.append(content);
-                                        }
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-                                    replace = sb.toString().replace("{#body#}", stringBuilder.toString());
+//                                    StringBuilder sb = new StringBuilder();
+//                                    try {
+//                                        InputStream in = MyCsdnApplication.getAppContext().getResources().getAssets().open("detialmodel.html");
+//                                        String content = "";
+//                                        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+//                                        while ((content = reader.readLine()) != null) {
+//                                            sb.append(content);
+//                                        }
+//                                    } catch (Exception e) {
+//                                        e.printStackTrace();
+//                                    }
+//                                    replace = sb.toString().replace("{#body#}", stringBuilder.toString());
                                 }
                             }
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        return replace;
+                        return stringBuilder.toString();
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<String>() {

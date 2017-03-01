@@ -1,7 +1,5 @@
 package improveus.com.mycsdn.presenter;
 
-import com.socks.library.KLog;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -78,13 +76,15 @@ public class MainPresenter implements BasePresenter {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+                        if (myCsdnModels != null && myCsdnModels.get(0).equals(mMainMvpView.getFirstCsdnData())) {
+                            return null;//如果获取的数据跟第一条数据一样则判定为加载失败
+                        }
                         return myCsdnModels;
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
-
 
 
 }

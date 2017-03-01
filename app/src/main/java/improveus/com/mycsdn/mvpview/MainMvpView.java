@@ -16,4 +16,7 @@ public interface MainMvpView {
     void omDataError(ListRefreshType type);
 
     void onDataNext(ListRefreshType type, ArrayList<MyCsdnModel> response);
+
+    MyCsdnModel getFirstCsdnData();
+
 }
