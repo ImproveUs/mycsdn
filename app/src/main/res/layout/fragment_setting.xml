@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
+                android:background="@color/background"
 
     >
 
@@ -14,7 +14,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/setting"
+            android:id="@+id/back"
             android:layout_width="50dp"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="45dp"
-        android:layout_marginBottom="10dp"
+
         android:scrollbars="none"
         >
 
@@ -84,6 +84,7 @@
                     android:background="@color/background"/>
 
                 <LinearLayout
+                    android:id="@+id/update_linear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="18dp">
@@ -96,6 +97,7 @@
                         android:textSize="@dimen/medium_text_size"/>
 
                     <TextView
+                        android:id="@+id/update_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right|center_vertical"
@@ -109,6 +111,7 @@
                     android:background="@color/background"/>
 
                 <LinearLayout
+                    android:id="@+id/clear_cache"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="18dp">
@@ -121,6 +124,7 @@
                         android:textSize="@dimen/medium_text_size"/>
 
                     <TextView
+                        android:id="@+id/clear_cache_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right|center_vertical"
@@ -223,7 +227,6 @@
                 android:textSize="@dimen/normal_text_size"/>
 
             <LinearLayout
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/white_shape"
@@ -238,7 +241,7 @@
                     android:padding="18dp"
                     android:clickable="true"
                     android:text="@string/share_apk"
-                    android:background=""
+                    android:background="?android:attr/selectableItemBackground"
                     android:textColor="@color/text_black"
                     android:textSize="@dimen/medium_text_size"/>
 
@@ -249,10 +252,11 @@
 
                 <TextView
                     android:id="@+id/share_weixin"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="18dp"
                     android:text="@string/share_weixin"
+                    android:background="?android:attr/selectableItemBackground"
                     android:textColor="@color/text_black"
                     android:textSize="@dimen/medium_text_size"/>
 
@@ -263,10 +267,11 @@
 
                 <TextView
                     android:id="@+id/about_opeaner"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="18dp"
                     android:text="@string/share_about_opean"
+                    android:background="?android:attr/selectableItemBackground"
                     android:textColor="@color/text_black"
                     android:textSize="@dimen/medium_text_size"/>
 

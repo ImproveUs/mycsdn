@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-import improveus.com.mycsdn.MyCsdnApplication;
 import okhttp3.Cache;
 import okhttp3.CacheControl;
 import okhttp3.Interceptor;
@@ -19,13 +18,20 @@ import okhttp3.Response;
  *
  * Created by pszh on 2017/2/15 14:56
  * pengsizheng@qq.coom
+ *
+ * 查看这篇文章http://blog.csdn.net/qqyanjiang/article/details/51316116
  */
 public class OkHttpUtil {
 
     /**
-     * 设缓存有效期为两天
+     * 无网设缓存有效期为两天
      */
     private static final long CACHE_STALE_SEC = 60 * 60 * 24 ;
+    /**
+     *有网使用本地缓存一分钟，不再去请求网络
+     */
+
+    private static final long maxAge = 60;
 
     public static OkHttpUtil getInstance(){
         return new OkHttpUtil();
@@ -33,7 +39,7 @@ public class OkHttpUtil {
 
     public OkHttpClient getOkHttpClient(){
         //缓存路径
-        Cache cache = new Cache(MyCsdnApplication.getAppContext().getExternalCacheDir(),
+        Cache cache = new Cache(MixUtil.CACHE_FILE,
                 1024 * 1024 * 10);//缓存文件为10MB
         return  new OkHttpClient.Builder()
                 .cache(cache)
@@ -44,7 +50,7 @@ public class OkHttpUtil {
                 //设置写的时间
                 .writeTimeout(10, TimeUnit.SECONDS)
                 .addInterceptor(mRewriteCacheControlInterceptor)
-//                .addNetworkInterceptor(mRewriteCacheControlInterceptor)
+                .addNetworkInterceptor(mRewriteCacheControlInterceptor)
                 .addInterceptor(mLoggingInterceptor)
                 .build();
     }
@@ -66,16 +72,20 @@ public class OkHttpUtil {
 
             Response originalResponse = chain.proceed(request);
             if(NetworkUtil.isNetworkAvailable()){
-                //有网的时候读接口上的 @Headers 里的配置，你可以在这里进行统一的设置
-                String cacheControl = request.cacheControl().toString();
+                ////有网的时候读接口上的 @Headers 里的配置，你可以在这里进行统一的设置
+                //String cacheControl = request.cacheControl().toString();
                 return originalResponse.newBuilder()
-                        .header("Cache-Control",cacheControl)
                         .removeHeader("Pragma")
+                        .removeHeader("Cache-Control")
+//                        .header("Cache-Control",cacheControl)
+                        .header("Cache-Control", "public, max-age=" + maxAge)
                         .build();
+
             }else{
                 return originalResponse.newBuilder()
-                        .header("Cache-Control","public, only-if-cached, max-stale=" + CACHE_STALE_SEC)
                         .removeHeader("Pragma")
+                        .removeHeader("Cache-Control")
+                        .header("Cache-Control", "public, only-if-cached, max-stale="+ CACHE_STALE_SEC)
                         .build();
             }
         }

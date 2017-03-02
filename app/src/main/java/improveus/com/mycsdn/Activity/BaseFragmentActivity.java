@@ -25,7 +25,6 @@ public abstract class BaseFragmentActivity extends AppCompatActivity {
 
     /**
      * 附着fragment  这里还是使用v4报的fragment
-     *
      * @param fragment
      */
     protected void attachFragment(@NonNull Fragment fragment) {

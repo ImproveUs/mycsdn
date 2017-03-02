@@ -28,7 +28,6 @@ import improveus.com.mycsdn.activity.SettingActivity;
 import improveus.com.mycsdn.manage.ListRefreshType;
 import improveus.com.mycsdn.model.MyCsdnModel;
 import improveus.com.mycsdn.mvpview.MainMvpView;
-import improveus.com.mycsdn.presenter.BasePresenter;
 import improveus.com.mycsdn.presenter.MainPresenter;
 import improveus.com.mycsdn.util.RecyclerViewDivider;
 
@@ -36,7 +35,7 @@ import improveus.com.mycsdn.util.RecyclerViewDivider;
  * 作者：琉璃琥 on 2017/2/14 14:13
  * 邮箱: 511421121@qq.com
  */
-public class MainFragment extends BaseFragment implements MainMvpView {
+public class MainFragment extends BaseFragment<MainPresenter> implements MainMvpView {
 
     private SuperSwipeMenuRecyclerView articleView;
     private ArticleAdapter articleAdapter;
@@ -119,7 +118,7 @@ public class MainFragment extends BaseFragment implements MainMvpView {
     }
 
     @Override
-    protected BasePresenter createPresenter() {
+    protected MainPresenter createPresenter() {
         return mMainPresenter = new MainPresenter(this);
     }
 
@@ -134,7 +133,11 @@ public class MainFragment extends BaseFragment implements MainMvpView {
 
     @Override
     public void omDataError(ListRefreshType type) {
-
+        if (type == ListRefreshType.RESRESH_TYPE) {
+            articleView.completeRefresh();
+        } else {
+            articleView.completeLoadMore();
+        }
     }
 
     @Override
