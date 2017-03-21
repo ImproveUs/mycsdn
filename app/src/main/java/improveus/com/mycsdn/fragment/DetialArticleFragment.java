@@ -4,10 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.PictureDrawable;
-import android.media.tv.TvView;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.Editable;
@@ -15,23 +12,15 @@ import android.text.Html;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.BackgroundColorSpan;
-import android.util.Log;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
-
-import com.socks.library.KLog;
-import com.socks.library.klog.XmlLog;
 
 import org.xml.sax.XMLReader;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.concurrent.ExecutionException;
 
 import improveus.com.mycsdn.R;
@@ -128,7 +117,6 @@ public class DetialArticleFragment extends BaseFragment<DetialArticlePresenter> 
 
     /**
      * 根据地址返回一个drawable对象
-     *
      * @param url
      * @return
      * @throws IOException

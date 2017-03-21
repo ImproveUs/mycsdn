@@ -11,7 +11,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        >
 
         <TextView
             android:id="@+id/title_name"
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:ellipsize="end"
-            android:maxLength="10"
+            android:maxEms="13"
             android:singleLine="true"
             android:text="@string/item_main_title_name"
             android:textSize="@dimen/max_text_size"/>

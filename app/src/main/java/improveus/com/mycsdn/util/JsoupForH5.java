@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import improveus.com.mycsdn.model.MyCsdnModel;
+import improveus.com.mycsdn.model.PanelCategory;
 import okhttp3.ResponseBody;
 
 /**
@@ -52,5 +53,20 @@ public class JsoupForH5 {
             myCsdnModels.add(myCsdnModel);
         }
         return myCsdnModels;
+    }
+
+
+    public  static ArrayList<PanelCategory> responseBody2PanelCategory(ResponseBody responseBody) throws IOException {
+        ArrayList<PanelCategory>  panelList = new ArrayList<PanelCategory>();
+        Document doc = Jsoup.parse(responseBody.string());
+        Elements panelCategory = doc.getElementsByClass("panel_body");
+        Elements itema = panelCategory.get(4).getElementsByTag("a");
+        for(Element item :itema){
+            PanelCategory pc = new PanelCategory();
+            pc.setUrl(item.attr("href"));
+            pc.setTitleName(item.text());
+            panelList.add(pc);
+        }
+            return panelList;
     }
 }
